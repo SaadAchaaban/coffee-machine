@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // [ Saad Achaaban ] I have no doubt that this is not the correct method to follow for referencing my service
-builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachineStub>();
+builder.Services.AddScoped<IMachineActionLog, MachineActionLogService>();
+builder.Services.AddScoped<ICoffeeMachine, CoffeeMachineStub>();
 
 builder.Services.AddDbContext<ApplicationDbContext>( options => options.UseSqlite(
     builder.Configuration.GetConnectionString("localDb")

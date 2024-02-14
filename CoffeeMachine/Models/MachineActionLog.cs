@@ -11,9 +11,9 @@ namespace CoffeeMachine.Models
         [Required]
         public string ActionType { get; set; }
 
-        public MachineActionLog(DateTime actionTime, string actionType)
+        public MachineActionLog(string actionType)
         {
-            ActionTime = actionTime;
+            ActionTime = DateTime.Now;
             ActionType = actionType;
         }
     }

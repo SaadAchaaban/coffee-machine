@@ -19,10 +19,12 @@ namespace CoffeeMachine.Services
        || WaterTrayState == State.Alert;
 
         private readonly Random _randomStateGenerator;
+        private readonly IMachineActionLog _logService;
 
-        public CoffeeMachineStub()
+        public CoffeeMachineStub(IMachineActionLog logService)
         {
             _randomStateGenerator = new Random();
+            _logService = logService;
         }
 
         public async Task TurnOnAsync()
@@ -37,6 +39,7 @@ namespace CoffeeMachine.Services
 
             // [Machine turned on]
             IsOn = true;
+            await _logService.CreateLogAsync(new MachineActionLog("TurnOn"));
         }
 
         public async Task TurnOffAsync()
