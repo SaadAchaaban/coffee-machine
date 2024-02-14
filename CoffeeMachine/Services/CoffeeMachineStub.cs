@@ -19,12 +19,12 @@ namespace CoffeeMachine.Services
        || WaterTrayState == State.Alert;
 
         private readonly Random _randomStateGenerator;
-        private readonly IMachineActionLog _logService;
+        private readonly IServiceProvider _serviceProvider;
 
-        public CoffeeMachineStub(IMachineActionLog logService)
+        public CoffeeMachineStub(IServiceProvider serviceProvider)
         {
             _randomStateGenerator = new Random();
-            _logService = logService;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task TurnOnAsync()
@@ -39,7 +39,7 @@ namespace CoffeeMachine.Services
 
             // [Machine turned on]
             IsOn = true;
-            await _logService.CreateLogAsync(new MachineActionLog("TurnOn"));
+            await LogActionAsync("TurnOn");
         }
 
         public async Task TurnOffAsync()
@@ -48,6 +48,7 @@ namespace CoffeeMachine.Services
                 throw new InvalidOperationException("Invalid state");
             // [Machine turned off]
             IsOn = false;
+            await LogActionAsync("TurnOff");
         }
 
         public async Task MakeCoffeeAsync(CoffeeCreationOptions options)
@@ -57,10 +58,20 @@ namespace CoffeeMachine.Services
             IsMakingCoffee = true;
             // [Make the coffee]
             Thread.Sleep(10000);
+            await LogActionAsync("MakeCoffee");
             IsMakingCoffee = false;
         }
 
         // Randomly create a state for testing. This can be replaced as required.
         private State GetRandomState() => _randomStateGenerator.Next(1, 10) == 10 ? State.Alert : State.Okay;
+
+        private async Task LogActionAsync(string actionType)
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var logService = scope.ServiceProvider.GetRequiredService<IMachineActionLog>();
+                await logService.CreateLogAsync(new MachineActionLog(actionType));
+            }
+        }
     }
 }

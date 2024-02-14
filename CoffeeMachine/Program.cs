@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 
 // [ Saad Achaaban ] I have no doubt that this is not the correct method to follow for referencing my service
 builder.Services.AddScoped<IMachineActionLog, MachineActionLogService>();
-builder.Services.AddScoped<ICoffeeMachine, CoffeeMachineStub>();
+builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachineStub>();
 
 builder.Services.AddDbContext<ApplicationDbContext>( options => options.UseSqlite(
     builder.Configuration.GetConnectionString("localDb")
