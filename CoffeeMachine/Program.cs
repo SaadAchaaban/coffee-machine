@@ -1,9 +1,17 @@
+using CoffeeMachine.Interfaces;
+using CoffeeMachine.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// [ Saad Achaaban ] I have no doubt that this is not the correct method to follow for referencing my service
+builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachineStub>();
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
