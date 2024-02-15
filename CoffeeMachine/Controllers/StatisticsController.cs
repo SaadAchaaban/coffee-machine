@@ -9,9 +9,9 @@ namespace CoffeeMachine.Controllers
     [Route("[controller]")]
     public class StatisticsController : ControllerBase
     {
-        private readonly IStatisticsService _statisticsService;
+        private readonly IStatistics _statisticsService;
 
-        public StatisticsController(IStatisticsService statisticsService)
+        public StatisticsController(IStatistics statisticsService)
         {
             _statisticsService = statisticsService;
         }

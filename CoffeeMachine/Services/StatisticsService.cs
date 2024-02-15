@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeMachine.Services
 {
-    public class StatisticsService : IStatisticsService
+    public class StatisticsService : IStatistics
     {
         private readonly ApplicationDbContext _context;
 
