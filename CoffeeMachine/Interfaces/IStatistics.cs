@@ -2,7 +2,7 @@
 
 namespace CoffeeMachine.Interfaces
 {
-    public interface IStatisticsService
+    public interface IStatistics
     {
         Task<Dictionary<string, DailyStatistics>> GetDailyStatisticsAsync();
         Task<Dictionary<string, Dictionary<string, int>>> GetHourlyAverageCupsAsync();

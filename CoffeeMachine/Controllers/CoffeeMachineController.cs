@@ -22,7 +22,7 @@ namespace CoffeeMachine.Controllers
             try
             {
                 await _coffeeMachine.TurnOnAsync();
-                return Ok("Coffee machine turned on successfully.");
+                return Ok(new { message = "Coffee machine turned on successfully." });
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace CoffeeMachine.Controllers
             try
             {
                 await _coffeeMachine.TurnOffAsync();
-                return Ok("Coffee machine turned off successfully.");
+                return Ok(new { message = "Coffee machine turned off successfully." });
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace CoffeeMachine.Controllers
             try
             {
                 await _coffeeMachine.MakeCoffeeAsync(options);
-                return Ok("Coffee made successfully.");
+                return Ok(new { message = "Coffee made successfully." });
             }
             catch (Exception ex)
             {
