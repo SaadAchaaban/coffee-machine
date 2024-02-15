@@ -63,7 +63,7 @@ namespace CoffeeMachine.Services
         }
 
         // Randomly create a state for testing. This can be replaced as required.
-        private State GetRandomState() => _randomStateGenerator.Next(1, 10) == 10 ? State.Alert : State.Okay;
+        private State GetRandomState() => _randomStateGenerator.Next(1, 11) == 10 ? State.Alert : State.Okay;
 
         private async Task LogActionAsync(string actionType)
         {
