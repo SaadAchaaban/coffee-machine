@@ -14,6 +14,16 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IMachineActionLog, MachineActionLogService>();
 builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachineStub>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>( options => options.UseSqlite(
     builder.Configuration.GetConnectionString("localDb")
 ));
@@ -30,6 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
